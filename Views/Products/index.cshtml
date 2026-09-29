@@ -10,7 +10,7 @@
 
 <table class="table table-bordered">
     <thead>
-        <tr><th>Id</th><th>Name</th><th>Price</th><th>Actions</th></tr>
+        <tr><th>Id</th><th>Name</th><th>Price</th><th>Description</th><th>Unit Measurement</th><th>Actions</th></tr>
     </thead>
     <tbody>
         @foreach (var p in Model)
@@ -19,6 +19,8 @@
                 <td>@p.Id</td>
                 <td>@p.Name</td>
                 <td>@p.Price</td>
+                <td>@p.Description</td>
+                <td>@p.UnitMeasure</td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@p.Id" class="btn btn-sm btn-warning">Edit</a>
                     <a asp-action="Delete" asp-route-id="@p.Id" class="btn btn-sm btn-danger"
