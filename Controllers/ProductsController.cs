@@ -17,21 +17,6 @@ namespace HaraMVC.Controllers
         private readonly ApplicationDbContext _db;
 
         public ProductsController(ApplicationDbContext db) { _db = db; }
-
- 
-
-        // shows the list
-
-        public IActionResult Index()
-
-        {
-
-            var products = _db.Products.ToList();
-
-            return View(products);
-
-        }
-
  
 
         // shows the empty add-form
@@ -90,6 +75,19 @@ namespace HaraMVC.Controllers
             }
             return RedirectToAction("Index");
         }
+
+            public IActionResult Index(string searchString)
+            {
+                var products = _db.Products.AsQueryable();
+
+                if (!string.IsNullOrEmpty(searchString))
+                {
+                    products = products.Where(p => p.Name.Contains(searchString));
+                }
+
+                ViewData["searchString"] = searchString;
+                return View(products.ToList());
+            }
 
     }
 
